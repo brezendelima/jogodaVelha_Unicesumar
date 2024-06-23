@@ -21,10 +21,10 @@ class Jogador {
 }
 
 class JogoDaVelha {
-    constructor(jogador1, jogador2) {
+    constructor(jogador1, jogador2, contraComputador = false) {
         this.jogador1 = jogador1;
         this.jogador2 = jogador2;
-        this.jogadorAtual = jogador1;
+        this.jogadorAtual = jogador1; // Partida começa com o jogador
         this.tabuleiro = Array(9).fill(null);
         this.posicoes = [
             [0, 1, 2],
@@ -36,6 +36,7 @@ class JogoDaVelha {
             [0, 4, 8],
             [2, 4, 6],
         ];
+        this.contraComputador = contraComputador;
     }
 
     fazerJogada(index) {
@@ -56,6 +57,9 @@ class JogoDaVelha {
                 this.reiniciarJogo();
             } else {
                 this.alternarJogador();
+                if (this.contraComputador && this.jogadorAtual === this.jogador2) {
+                    this.jogadaComputador();
+                }
             }
         }
     }
@@ -78,6 +82,8 @@ class JogoDaVelha {
     reiniciarJogo() {
         this.tabuleiro.fill(null);
         document.querySelectorAll('.jogo button').forEach(botao => botao.innerHTML = '');
+        this.jogadorAtual = this.jogador1; // Garante que o jogador começa a partida
+        document.querySelector(".jogador-atual").innerHTML = `JOGADOR DA VEZ: ${this.jogadorAtual.nome}`;
     }
 
     atualizarRanking() {
@@ -94,6 +100,14 @@ class JogoDaVelha {
         listaRanking.innerHTML = ranking.map(jogador =>
             `<li>${jogador.nome} - Vitórias: ${jogador.vitorias}, Derrotas: ${jogador.derrotas}, Empates: ${jogador.empates}</li>`
         ).join('');
+    }
+
+    jogadaComputador() {
+        const indicesVazios = this.tabuleiro.map((celula, index) => celula === null ? index : null).filter(index => index !== null);
+        const indexAleatorio = indicesVazios[Math.floor(Math.random() * indicesVazios.length)];
+        if (indexAleatorio !== -1) {
+            setTimeout(() => this.fazerJogada(indexAleatorio), 500);
+        }
     }
 }
 
@@ -116,5 +130,26 @@ document.getElementById('iniciar-jogo').addEventListener('click', () => {
         jogo.exibirRanking();
     } else {
         alert('Por favor, insira os nomes dos dois jogadores.');
+    }
+});
+
+document.getElementById('jogar-computador').addEventListener('click', () => {
+    const nomeJogador1 = document.getElementById('jogador1').value;
+    if (nomeJogador1) {
+        const jogador1 = new Jogador(nomeJogador1, 'X');
+        const jogador2 = new Jogador('Computador', 'O');
+        const jogo = new JogoDaVelha(jogador1, jogador2, true);
+
+        document.querySelector('.container-jogo').style.display = 'flex';
+        document.querySelector('.info-jogador').style.display = 'none';
+        document.querySelector('.jogador-atual').innerHTML = `JOGADOR DA VEZ: ${jogo.jogadorAtual.nome}`;
+
+        document.querySelectorAll('.jogo button').forEach(botao => {
+            botao.addEventListener('click', (e) => jogo.fazerJogada(e.target.getAttribute('data-i')));
+        });
+
+        jogo.exibirRanking();
+    } else {
+        alert('Por favor, insira o nome do jogador.');
     }
 });
