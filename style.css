@@ -6,37 +6,48 @@
 }
 
 body {
-    height: 100vh;
+    font-family: Arial, sans-serif;
     display: flex;
-    align-items: center;
     justify-content: center;
-    background: url('controles aleatórios.jpg');
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url('imagem.jpg');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 
-main {
+.main-container {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    justify-content: center;
     align-items: center;
     background: rgba(255, 255, 255, 0.9);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    max-width: 600px;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
 h1 {
     text-align: center;
+    margin-bottom: 10px;
+    font-size: 24px;
+    color: red;
 }
 
 hr {
-    font-weight: bold;
-    height: 3px;
-    background: black;
-    margin-bottom: 10px;
     width: 100%;
+    margin-bottom: 20px;
+    border: none;
+    border-top: 3px solid black;
 }
 
 .info-jogador {
@@ -44,49 +55,71 @@ hr {
     flex-direction: column;
     gap: 10px;
     align-items: center;
+    margin-bottom: 20px;
+}
+
+.info-jogador label {
+    font-size: 16px;
 }
 
 .info-jogador input {
     padding: 10px;
     font-size: 16px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.info-jogador button {
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 10px;
 }
 
 .container-jogo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: none;
+    flex-direction: row;
+    align-items: flex-start;
     background: rgba(255, 255, 255, 0.9);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 100%;
 }
 
 .jogo {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
 }
 
-.jogo button {
+.tabuleiro {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-gap: 10px;
+}
+
+.tabuleiro button {
     width: 100px;
     height: 100px;
-    margin: 5px;
-    cursor: pointer;
-    font-size: 50px;
+    font-size: 24px;
+}
+
+.ranking {
+    border: 1px solid #000;
+    padding: 10px;
+    border-radius: 5px;
+    min-width: 200px;
     background: rgba(255, 255, 255, 0.9);
-    border: 1px solid #ddd;
+}
+
+.ranking h2 {
+    text-align: center;
+    margin-top: 0;
 }
 
 .jogador-atual {
-    margin-top: 10px;
-}
-
-#ranking {
-    list-style: none;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 10px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    margin-top: 10px;
-    width: 100%;
+    margin-bottom: 10px;
+    font-weight: bold;
 }
