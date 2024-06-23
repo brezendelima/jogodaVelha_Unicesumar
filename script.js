@@ -1,32 +1,32 @@
-class Player {
-    constructor(name, symbol) {
-        this.name = name;
-        this.symbol = symbol;
-        this.wins = 0;
-        this.losses = 0;
-        this.draws = 0;
+class Jogador {
+    constructor(nome, simbolo) {
+        this.nome = nome;
+        this.simbolo = simbolo;
+        this.vitorias = 0;
+        this.derrotas = 0;
+        this.empates = 0;
     }
 
-    recordWin() {
-        this.wins++;
+    registrarVitoria() {
+        this.vitorias++;
     }
 
-    recordLoss() {
-        this.losses++;
+    registrarDerrota() {
+        this.derrotas++;
     }
 
-    recordDraw() {
-        this.draws++;
+    registrarEmpate() {
+        this.empates++;
     }
 }
 
-class TicTacToe {
-    constructor(player1, player2) {
-        this.player1 = player1;
-        this.player2 = player2;
-        this.currentPlayer = player1;
-        this.board = Array(9).fill(null);
-        this.positions = [
+class JogoDaVelha {
+    constructor(jogador1, jogador2) {
+        this.jogador1 = jogador1;
+        this.jogador2 = jogador2;
+        this.jogadorAtual = jogador1;
+        this.tabuleiro = Array(9).fill(null);
+        this.posicoes = [
             [0, 1, 2],
             [3, 4, 5],
             [6, 7, 8],
@@ -38,82 +38,82 @@ class TicTacToe {
         ];
     }
 
-    makeMove(index) {
-        if (!this.board[index]) {
-            this.board[index] = this.currentPlayer.symbol;
-            document.querySelector(`button[data-i="${index}"]`).innerHTML = this.currentPlayer.symbol;
-            if (this.checkWin()) {
-                alert(`${this.currentPlayer.name} ganhou!`);
-                this.currentPlayer.recordWin();
-                this.getOpponent().recordLoss();
-                this.updateRanking();
-                this.resetGame();
-            } else if (this.board.every(cell => cell)) {
+    fazerJogada(index) {
+        if (!this.tabuleiro[index]) {
+            this.tabuleiro[index] = this.jogadorAtual.simbolo;
+            document.querySelector(`button[data-i="${index}"]`).innerHTML = this.jogadorAtual.simbolo;
+            if (this.verificarVitoria()) {
+                alert(`${this.jogadorAtual.nome} ganhou!`);
+                this.jogadorAtual.registrarVitoria();
+                this.getOponente().registrarDerrota();
+                this.atualizarRanking();
+                this.reiniciarJogo();
+            } else if (this.tabuleiro.every(celula => celula)) {
                 alert('Empate!');
-                this.player1.recordDraw();
-                this.player2.recordDraw();
-                this.updateRanking();
-                this.resetGame();
+                this.jogador1.registrarEmpate();
+                this.jogador2.registrarEmpate();
+                this.atualizarRanking();
+                this.reiniciarJogo();
             } else {
-                this.switchPlayer();
+                this.alternarJogador();
             }
         }
     }
 
-    checkWin() {
-        return this.positions.some(position =>
-            position.every(index => this.board[index] === this.currentPlayer.symbol)
+    verificarVitoria() {
+        return this.posicoes.some(posicao =>
+            posicao.every(index => this.tabuleiro[index] === this.jogadorAtual.simbolo)
         );
     }
 
-    switchPlayer() {
-        this.currentPlayer = this.currentPlayer === this.player1 ? this.player2 : this.player1;
-        document.querySelector(".currentPlayer").innerHTML = `JOGADOR DA VEZ: ${this.currentPlayer.name}`;
+    alternarJogador() {
+        this.jogadorAtual = this.jogadorAtual === this.jogador1 ? this.jogador2 : this.jogador1;
+        document.querySelector(".jogador-atual").innerHTML = `JOGADOR DA VEZ: ${this.jogadorAtual.nome}`;
     }
 
-    getOpponent() {
-        return this.currentPlayer === this.player1 ? this.player2 : this.player1;
+    getOponente() {
+        return this.jogadorAtual === this.jogador1 ? this.jogador2 : this.jogador1;
     }
 
-    resetGame() {
-        this.board.fill(null);
-        document.querySelectorAll('.game button').forEach(button => button.innerHTML = '');
+    reiniciarJogo() {
+        this.tabuleiro.fill(null);
+        document.querySelectorAll('.jogo button').forEach(botao => botao.innerHTML = '');
     }
 
-    updateRanking() {
+    atualizarRanking() {
         localStorage.setItem('ranking', JSON.stringify([
-            {name: this.player1.name, wins: this.player1.wins, losses: this.player1.losses, draws: this.player1.draws},
-            {name: this.player2.name, wins: this.player2.wins, losses: this.player2.losses, draws: this.player2.draws},
+            {nome: this.jogador1.nome, vitorias: this.jogador1.vitorias, derrotas: this.jogador1.derrotas, empates: this.jogador1.empates},
+            {nome: this.jogador2.nome, vitorias: this.jogador2.vitorias, derrotas: this.jogador2.derrotas, empates: this.jogador2.empates},
         ]));
-        this.displayRanking();
+        this.exibirRanking();
     }
 
-    displayRanking() {
+    exibirRanking() {
         const ranking = JSON.parse(localStorage.getItem('ranking')) || [];
-        const rankingList = document.getElementById('ranking');
-        rankingList.innerHTML = ranking.map(player =>
-            `<li>${player.name} - Vitórias: ${player.wins}, Derrotas: ${player.losses}, Empates: ${player.draws}</li>`
+        const listaRanking = document.getElementById('ranking');
+        listaRanking.innerHTML = ranking.map(jogador =>
+            `<li>${jogador.nome} - Vitórias: ${jogador.vitorias}, Derrotas: ${jogador.derrotas}, Empates: ${jogador.empates}</li>`
         ).join('');
     }
 }
 
-document.getElementById('startGame').addEventListener('click', () => {
-    const player1Name = document.getElementById('player1').value;
-    const player2Name = document.getElementById('player2').value;
-    if (player1Name && player2Name) {
-        const player1 = new Player(player1Name, 'X');
-        const player2 = new Player(player2Name, 'O');
-        const game = new TicTacToe(player1, player2);
+document.getElementById('iniciar-jogo').addEventListener('click', () => {
+    const nomeJogador1 = document.getElementById('jogador1').value;
+    const nomeJogador2 = document.getElementById('jogador2').value;
+    if (nomeJogador1 && nomeJogador2) {
+        const jogador1 = new Jogador(nomeJogador1, 'X');
+        const jogador2 = new Jogador(nomeJogador2, 'O');
+        const jogo = new JogoDaVelha(jogador1, jogador2);
 
-        document.querySelector('.game-container').style.display = 'flex';
-        document.querySelector('.player-info').style.display = 'none';
-        document.querySelector('.currentPlayer').innerHTML = `JOGADOR DA VEZ: ${game.currentPlayer.name}`;
+        document.querySelector('.container-jogo').style.display = 'flex';
+        document.querySelector('.info-jogador').style.display = 'none';
+        document.querySelector('.jogador-atual').innerHTML = `JOGADOR DA VEZ: ${jogo.jogadorAtual.nome}`;
 
-        document.querySelectorAll('.game button').forEach(button => {
-            button.addEventListener('click', (e) => game.makeMove(e.target.getAttribute('data-i')));
+        document.querySelectorAll('.jogo button').forEach(botao => {
+            botao.addEventListener('click', (e) => jogo.fazerJogada(e.target.getAttribute('data-i')));
         });
 
-        game.displayRanking();
+        jogo.exibirRanking();
     } else {
         alert('Por favor, insira os nomes dos dois jogadores.');
     }

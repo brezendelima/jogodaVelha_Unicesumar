@@ -10,7 +10,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url('controles\ aleatórios.jpg');
+    background: url('controles aleatórios.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -39,19 +39,19 @@ hr {
     width: 100%;
 }
 
-.player-info {
+.info-jogador {
     display: flex;
     flex-direction: column;
     gap: 10px;
     align-items: center;
 }
 
-.player-info input {
+.info-jogador input {
     padding: 10px;
     font-size: 16px;
 }
 
-.game-container {
+.container-jogo {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -61,13 +61,13 @@ hr {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.game {
+.jogo {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 5px;
 }
 
-.game button {
+.jogo button {
     width: 100px;
     height: 100px;
     margin: 5px;
@@ -77,7 +77,7 @@ hr {
     border: 1px solid #ddd;
 }
 
-.currentPlayer {
+.jogador-atual {
     margin-top: 10px;
 }
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,13 +11,13 @@
   <main>
     <h1>JOGO DA VELHA</h1>
     <hr />
-    <div class="player-info">
-      <input type="text" id="player1" placeholder="Nome do Jogador 1">
-      <input type="text" id="player2" placeholder="Nome do Jogador 2">
-      <button id="startGame">Iniciar Jogo</button>
+    <div class="info-jogador">
+      <input type="text" id="jogador1" placeholder="Nome do Jogador 1">
+      <input type="text" id="jogador2" placeholder="Nome do Jogador 2">
+      <button id="iniciar-jogo">Iniciar Jogo</button>
     </div>
-    <div class="game-container" style="display: none;">
-      <div class="game">
+    <div class="container-jogo" style="display: none;">
+      <div class="jogo">
         <button data-i="0"></button>
         <button data-i="1"></button>
         <button data-i="2"></button>
@@ -28,7 +28,7 @@
         <button data-i="7"></button>
         <button data-i="8"></button>
       </div>
-      <h2 class="currentPlayer"></h2>
+      <h2 class="jogador-atual"></h2>
       <h3>Ranking:</h3>
       <ul id="ranking"></ul>
     </div>
