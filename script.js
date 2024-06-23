@@ -24,7 +24,7 @@ class JogoDaVelha {
     constructor(jogador1, jogador2, contraComputador = false) {
         this.jogador1 = jogador1;
         this.jogador2 = jogador2;
-        this.jogadorAtual = jogador1; // Partida começa com o jogador
+        this.jogadorAtual = jogador1;
         this.tabuleiro = Array(9).fill(null);
         this.posicoes = [
             [0, 1, 2],
@@ -81,15 +81,15 @@ class JogoDaVelha {
 
     reiniciarJogo() {
         this.tabuleiro.fill(null);
-        document.querySelectorAll('.jogo button').forEach(botao => botao.innerHTML = '');
-        this.jogadorAtual = this.jogador1; // Garante que o jogador começa a partida
+        document.querySelectorAll('.tabuleiro button').forEach(botao => botao.innerHTML = '');
+        this.jogadorAtual = this.jogador1;
         document.querySelector(".jogador-atual").innerHTML = `JOGADOR DA VEZ: ${this.jogadorAtual.nome}`;
     }
 
     atualizarRanking() {
         localStorage.setItem('ranking', JSON.stringify([
-            {nome: this.jogador1.nome, vitorias: this.jogador1.vitorias, derrotas: this.jogador1.derrotas, empates: this.jogador1.empates},
-            {nome: this.jogador2.nome, vitorias: this.jogador2.vitorias, derrotas: this.jogador2.derrotas, empates: this.jogador2.empates},
+            { nome: this.jogador1.nome, vitorias: this.jogador1.vitorias, derrotas: this.jogador1.derrotas, empates: this.jogador1.empates },
+            { nome: this.jogador2.nome, vitorias: this.jogador2.vitorias, derrotas: this.jogador2.derrotas, empates: this.jogador2.empates },
         ]));
         this.exibirRanking();
     }
@@ -123,7 +123,7 @@ document.getElementById('iniciar-jogo').addEventListener('click', () => {
         document.querySelector('.info-jogador').style.display = 'none';
         document.querySelector('.jogador-atual').innerHTML = `JOGADOR DA VEZ: ${jogo.jogadorAtual.nome}`;
 
-        document.querySelectorAll('.jogo button').forEach(botao => {
+        document.querySelectorAll('.tabuleiro button').forEach(botao => {
             botao.addEventListener('click', (e) => jogo.fazerJogada(e.target.getAttribute('data-i')));
         });
 
@@ -144,7 +144,7 @@ document.getElementById('jogar-computador').addEventListener('click', () => {
         document.querySelector('.info-jogador').style.display = 'none';
         document.querySelector('.jogador-atual').innerHTML = `JOGADOR DA VEZ: ${jogo.jogadorAtual.nome}`;
 
-        document.querySelectorAll('.jogo button').forEach(botao => {
+        document.querySelectorAll('.tabuleiro button').forEach(botao => {
             botao.addEventListener('click', (e) => jogo.fazerJogada(e.target.getAttribute('data-i')));
         });
 
