@@ -9,4 +9,6 @@ Bruno Rezende: Minha maior dificuldade ao desenvolver a jogabilidade contra o co
 
 Henrique Gabriel Bertoldi: Minha maior digiculdade no desenvolvimento do projeto foi ajustar o jogo e o placar do jogo dentro de um unico container, quando comecei a modificar esta parte do código acontecia de um container ficar sobrepondo o outro foi então que decidi apagar e refazer tudo dentro do "container-jogo" e com isso consegui o resultado esperado
 
+William Pinheiro: Não enfrentei nenhuma dificuldade no desenvolvimento da minha parte do projeto, que foi o html e uma parte do javascript, desenvolvi apenas as partes do placar e sua funcionalidade com cada etapa sendo concluído conforme planejado.
+
 GitHub Pages: https://brezendelima.github.io/jogodaVelha_Unicesumar/
