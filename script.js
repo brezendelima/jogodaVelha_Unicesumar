@@ -87,6 +87,18 @@ class JogoDaVelha {
     }
 
     atualizarRanking() {
+        const ranking = JSON.parse(localStorage.getItem('ranking')) || {};
+        ranking[this.jogador1.nome] = {
+            vitorias: this.jogador1.vitorias,
+            derrotas: this.jogador1.derrotas,
+            empates: this.jogador1.empates
+        };
+        ranking[this.jogador2.nome] = {
+            vitorias: this.jogador2.vitorias,
+            derrotas: this.jogador2.derrotas,
+            empates: this.jogador2.empates
+        
+        };
         localStorage.setItem('ranking', JSON.stringify([
             { nome: this.jogador1.nome, vitorias: this.jogador1.vitorias, derrotas: this.jogador1.derrotas, empates: this.jogador1.empates },
             { nome: this.jogador2.nome, vitorias: this.jogador2.vitorias, derrotas: this.jogador2.derrotas, empates: this.jogador2.empates },
@@ -111,13 +123,15 @@ class JogoDaVelha {
     }
 }
 
+let jogo = null;
+
 document.getElementById('iniciar-jogo').addEventListener('click', () => {
     const nomeJogador1 = document.getElementById('jogador1').value;
     const nomeJogador2 = document.getElementById('jogador2').value;
     if (nomeJogador1 && nomeJogador2) {
         const jogador1 = new Jogador(nomeJogador1, 'X');
         const jogador2 = new Jogador(nomeJogador2, 'O');
-        const jogo = new JogoDaVelha(jogador1, jogador2);
+         jogo = new JogoDaVelha(jogador1, jogador2);
 
         document.querySelector('.container-jogo').style.display = 'flex';
         document.querySelector('.info-jogador').style.display = 'none';
@@ -138,7 +152,7 @@ document.getElementById('jogar-computador').addEventListener('click', () => {
     if (nomeJogador1) {
         const jogador1 = new Jogador(nomeJogador1, 'X');
         const jogador2 = new Jogador('Computador', 'O');
-        const jogo = new JogoDaVelha(jogador1, jogador2, true);
+         jogo = new JogoDaVelha(jogador1, jogador2, true);
 
         document.querySelector('.container-jogo').style.display = 'flex';
         document.querySelector('.info-jogador').style.display = 'none';
@@ -152,4 +166,30 @@ document.getElementById('jogar-computador').addEventListener('click', () => {
     } else {
         alert('Por favor, insira o nome do jogador.');
     }
+});
+
+document.getElementById('zerar-ranking').addEventListener('click', () =>{ 
+    if (jogo){ 
+        localStorage.removeItem('ranking'); 
+
+        jogo.jogador1.vitorias = 0;
+        jogo.jogador1.derrotas = 0;
+        jogo.jogador1.empates = 0;
+
+        jogo.jogador2.vitorias = 0;
+        jogo.jogador2.derrotas = 0;
+        jogo.jogador2.empates = 0;
+
+        jogo.exibirRanking(); 
+
+        alert("Ranking zerado!");
+    } else { 
+        alert("Nenhum jogo em andamento!");
+    }
+}); 
+
+document.getElementById('voltar-menu').addEventListener('click', () => { 
+    document.querySelector('.container-jogo').style.display = 'none';
+    document.querySelector('.info-jogador').style.display = 'flex'; 
+    alert("Voltando ao Menu Principal");
 });

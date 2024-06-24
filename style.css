@@ -78,13 +78,14 @@ hr {
 
 .container-jogo {
     display: none;
-    flex-direction: row;
+    flex-direction: column;
     align-items: flex-start;
     background: rgba(255, 255, 255, 0.9);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     width: 100%;
+    margin-top: 20px;
 }
 
 .jogo {
@@ -112,6 +113,8 @@ hr {
     border-radius: 5px;
     min-width: 200px;
     background: rgba(255, 255, 255, 0.9);
+    margin-top: 20px;
+    margin-bottom: 50px;
 }
 
 .ranking h2 {
@@ -122,4 +125,11 @@ hr {
 .jogador-atual {
     margin-bottom: 10px;
     font-weight: bold;
+}
+
+.container-jogo button{ 
+    margin-top: 15px;
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
 }
