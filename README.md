@@ -11,4 +11,6 @@ Henrique Gabriel Bertoldi: Minha maior digiculdade no desenvolvimento do projeto
 
 William Pinheiro: Não enfrentei nenhuma dificuldade no desenvolvimento da minha parte do projeto, que foi o html e uma parte do javascript, desenvolvi apenas as partes do placar e sua funcionalidade com cada etapa sendo concluído conforme planejado.
 
+Thyago Augusto: Minha maior dificuldade durante o trabalho foi desenvolver o botão de "Voltar ao Menu", pelo jogo não se tratar de um site dividido em duas páginas que é possível linkar, o processo foi um pouco diferente do que o que eu estava acostumado.
+
 GitHub Pages: https://brezendelima.github.io/jogodaVelha_Unicesumar/
